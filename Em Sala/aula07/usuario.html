@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: #f8fafc;
+            background: #050816;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            top: -250px;
+            left: -200px;
+            background: #6d28d9;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.35;
+            animation: flutuar1 10s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 550px;
+            height: 550px;
+            right: -200px;
+            bottom: -250px;
+            background: #2563eb;
+            border-radius: 50%;
+            filter: blur(160px);
+            opacity: 0.3;
+            animation: flutuar2 12s ease-in-out infinite alternate;
+            z-index: -2;
+        }
+
+        @keyframes flutuar1 {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(100px, 80px);
+            }
+        }
+
+        @keyframes flutuar2 {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-100px, -80px);
+            }
+        }
+
+        .pagina {
+            width: 100%;
+            min-height: 100vh;
+            padding: 45px 6%;
+        }
+
+        header {
+            max-width: 1250px;
+            margin: 0 auto 35px;
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .marca {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            box-shadow:
+                0 0 30px rgba(124, 58, 237, 0.5),
+                inset 0 1px 1px rgba(255,255,255,0.3);
+            font-size: 28px;
+        }
+
+        .marca h1 {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .marca p {
+            margin-top: 5px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .online {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        .online span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 12px #22c55e;
+        }
+
+        main {
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .dashboard {
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 28px;
+            background: rgba(15, 23, 42, 0.72);
+            backdrop-filter: blur(30px);
+            box-shadow:
+                0 30px 100px rgba(0,0,0,0.45),
+                inset 0 1px 1px rgba(255,255,255,0.05);
+        }
+
+        .dashboard-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .titulo-tabela h2 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .titulo-tabela p {
+            margin-top: 7px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        #buscar-usuarios {
+            border: none;
+            padding: 14px 22px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(99,102,241,0.3);
+            transition: 0.25s;
+        }
+
+        #buscar-usuarios:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(99,102,241,0.5);
+        }
+
+        #buscar-usuarios:active {
+            transform: scale(0.97);
+        }
+
+        #mensagem {
+            min-height: 22px;
+            margin-bottom: 14px;
+            color: #a5b4fc;
+            font-size: 13px;
+        }
+
+        .tabela-box {
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 20px;
+            background: rgba(2,6,23,0.45);
+        }
+
+        #tabela-container {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        caption {
+            display: none;
+        }
+
+        thead {
+            background: linear-gradient(
+                90deg,
+                rgba(99,102,241,0.16),
+                rgba(168,85,247,0.1)
+            );
+        }
+
+        th {
+            padding: 19px 22px;
+            text-align: left;
+            color: #a5b4fc;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        td {
+            padding: 19px 22px;
+            color: #dbeafe;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.045);
+        }
+
+        tbody tr {
+            transition: 0.25s;
+        }
+
+        tbody tr:hover {
+            background: rgba(99,102,241,0.1);
+            box-shadow: inset 4px 0 0 #818cf8;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        td:first-child {
+            width: 80px;
+            color: #818cf8;
+            font-weight: 800;
+        }
+
+        td:first-child::before {
+            content: "#";
+            color: #4f46e5;
+        }
+
+        td:nth-child(2) {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        td:nth-child(3) {
+            color: #94a3b8;
+        }
+
+        td:nth-child(4) {
+            color: #c4b5fd;
+        }
+
+        footer {
+            max-width: 1250px;
+            margin: 25px auto 0;
+            display: flex;
+            justify-content: space-between;
+            color: #475569;
+            font-size: 12px;
+        }
+
+        @media (max-width: 800px) {
+            .pagina {
+                padding: 25px 15px;
+            }
+
+            .header-box {
+                align-items: flex-start;
+            }
+
+            .online {
+                display: none;
+            }
+
+            .marca h1 {
+                font-size: 28px;
+            }
+
+            .logo {
+                width: 55px;
+                height: 55px;
+            }
+
+            .dashboard {
+                padding: 20px;
+                border-radius: 22px;
+            }
+
+            .dashboard-top {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 18px;
+            }
+
+            #buscar-usuarios {
+                width: 100%;
+            }
+
+            .tabela-box {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 750px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 7px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pagina">
+
+        <header>
+            <div class="header-box">
+
+                <div class="marca">
+                    <div class="logo">👥</div>
+
+                    <div>
+                        <h1>Usuários</h1>
+                        <p>Central de gerenciamento e consulta</p>
+                    </div>
+                </div>
+
+                <div class="online">
+                    <span></span>
+                    Sistema online
+                </div>
+
+            </div>
+        </header>
+
+        <main>
+
+            <section class="dashboard">
+
+                <div class="dashboard-top">
+
+                    <div class="titulo-tabela">
+                        <h2>Usuários cadastrados</h2>
+                        <p>Informações obtidas diretamente da API</p>
+                    </div>
+
+                    <button id="buscar-usuarios">
+                        ✦ &nbsp; Buscar usuários
+                    </button>
+
+                </div>
+
+                <p id="mensagem"></p>
+
+                <div class="tabela-box" id="tabela-container">
+                    <table>
+
+                        <caption>
+                            Lista de usuários cadastrados
+                        </caption>
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Cidade</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="corpo-tabela"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            <span>Atividade de Desenvolvimento Web</span>
+            <span>JSONPlaceholder API</span>
+        </footer>
+
+    </div>
+
+    <script src="usuarios.js"></script>
+
+    <script>
+        const botao = document.querySelector('#buscar-usuarios');
+
+        botao.addEventListener('click', carregarUsuarios);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form</title>
+
+        <style>
+            .custom-table-container {
+                width: 100%;
+                overflow-x: auto;
+                margin: 1.5rem 0;
+            }
+
+            .custom-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-size: 0.95rem;
+                text-align: left;
+                background-color: #ffffff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow:
+                    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+                    0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            }
+
+            .custom-table thead tr {
+                background-color: #2563eb; /* Azul moderno */
+                color: #ffffff;
+                font-weight: 600;
+                letter-spacing: 0.03em;
+            }
+
+            .custom-table th,
+            .custom-table td {
+                padding: 12px 18px;
+            }
+
+            .custom-table tbody tr {
+                border-bottom: 1px solid #f1f5f9;
+                transition: background-color 0.15s ease;
+            }
+
+            .custom-table tbody tr:nth-of-type(even) {
+                background-color: #f8fafc;
+            }
+
+            .custom-table tbody tr:hover {
+                background-color: #e2e8f0;
+            }
+
+            .custom-table tbody tr:last-of-type {
+                border-bottom: none;
+            }
+
+            .custom-form {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                max-width: 420px;
+                padding: 24px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow:
+                    0 4px 6px -1px rgba(0, 0, 0, 0.07),
+                    0 2px 4px -2px rgba(0, 0, 0, 0.05);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                margin-bottom: 24px;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .form-group label {
+                font-size: 0.875rem;
+                font-weight: 600;
+                color: #334155;
+            }
+
+            .form-group input {
+                padding: 10px 14px;
+                border: 1px solid #cbd5e1;
+                border-radius: 6px;
+                font-size: 0.95rem;
+                color: #0f172a;
+                outline: none;
+                transition:
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            .form-group input:focus {
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            }
+
+            .form-row {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+                width: 100%;
+            }
+
+            .form-row .form-group {
+               flex: 1;
+            }
+
+            .form-row .form-group input {
+               width: 100%;
+               box-sizing: border-box;
+            }
+
+            .form-btn {
+                margin-top: 8px;
+                padding: 11px 16px;
+                background-color: #2563eb;
+                color: #ffffff;
+                font-size: 0.95rem;
+                font-weight: 600;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition:
+                    background-color 0.2s ease,
+                    transform 0.05s ease;
+            }
+
+            .turnos {
+               display: flex;
+               gap: 20px;
+               align-items: center;
+            }
+
+            .turnos label {
+               display: flex;
+               align-items: center;
+               gap: 5px;
+            }
+
+            .form-btn:hover {
+                background-color: #1d4ed8;
+            }
+
+            .form-btn:active {
+                transform: scale(0.98);
+            }
+        </style>
+    </head>
+    <body>
+        <form
+            id="meuFormulario"
+            class="custom-form"
+            onsubmit="
+                event.preventDefault();
+                nometabela.textContent = name.value;
+                interesttabela.textContent = interest.value;
+                emailtabela.textContent = email.value;
+                shift.textContent = shift.value;
+                name.value = '';
+                interest.value = '';
+                email.value = '';
+                shift.value = '';
+            "
+        >
+            <div class="form-row">
+                <div class="form-group">
+                   <label for="name">Nome</label>
+                   <input type="text" id="name" name="name" placeholder="Nome do aluno" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="exemplo@email.com" required />
+            </div>
+            </div>
+
+            <div class="form-group">
+                <label for="interest">Área de interesse</label>
+                <input type="interest" id="interest" name="interest" placeholder="Front-end" required />
+            </div>
+
+            <div class="form-group">
+                <label>Turno</label>
+            <div class="turnos">
+                <label><input type="radio" name="shift" value="morning">Manhã</label>
+                <label><input type="radio" name="shift" value="afternoon">Tarde</label>
+                <label><input type="radio" name="shift" value="night">Noite</label>
+            </div>
+            </div>
+
+            <div class="form-group">
+                <label><input type="checkbox" name="check" value="check">Confirmo os dados informados</label>
+            </div>
+
+            <button type="submit" class="form-btn">ADICIONA À TABELA</button>
+        </form>
+
+        <div class="custom-table-container">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Interest</th>
+                        <th>Email</th>
+                        <th>Shift</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            const form = document.getElementById("meuFormulario");
+            const tableBody = document.getElementById("table-body");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const nome = document.getElementById("name").value;
+                const interest = document.getElementById("interest").value;
+                const email = document.getElementById("email").value;
+                const shift = document.getElementsByClassName("shift").value;
+
+                const novaLinha = document.createElement("tr");
+
+                novaLinha.innerHTML = `
+        <td>${nome}</td>
+        <td>${interest}</td>
+        <td>${email}</td>
+        <td>${shift}</td>
+      `;
+
+                tableBody.appendChild(novaLinha);
+
+                form.reset();
+            });
+        </script>
+    </body>
+</html>

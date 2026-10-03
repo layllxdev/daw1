@@ -1,0 +1,8 @@
+TODO: realizar as 4 atividades na sequência de acordo com as orientações dadas em sala:
+
+1. 01-hiperlinks-externo
+2. 02-hiperlinks-interno
+3. 03-hiperlinks-local
+4. 04-parágrafo-imagem-cabeçalho-hiperlinks-local
+
+

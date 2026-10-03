@@ -1,0 +1,8 @@
+TODO: dê continuidade a atividade "03-hiperlinks-local", mas agora mostrando em cada página de cada animal as seguintes informações:
+
+1. Cabeçalho de nível H1 com o nome da raça
+2. Imagem do animal (ver pasta "Imagens" com todas as imagens necessárias). Para cada imagem, coloque depois dela um hiperlink com nome "Fonte" que leva até a URL original de onde a imagem foi retirada (ver aquivo leiame.txt na atividade "03-hiperlinks-local" com a URL de todas as imagens).
+3. Pelo menos um parágrafo falando a respeito da raça. Pode ser uma cópia literal das seguintes fontes:
+
+* Cachorros: https://optimumpet.com.br/dicas-e-conselhos/conheca-as-racas-de-cachorro-mais-comuns-no-brasil/
+* Gatos: https://inovaveterinaria.com.br/conheca-as-10-racas-de-gatos-mais-populares-no-brasil/
